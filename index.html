@@ -18,12 +18,35 @@
             padding: 20px;
             text-align: center;
         }
-        section {
-            max-width: 800px;
+
+        /* NEW FLEX LAYOUT FOR CONTENT + IMAGE */
+        .page-layout {
+            display: flex;
+            max-width: 1100px;
             margin: auto;
             padding: 20px;
+            gap: 30px;
+        }
+
+        .content-area {
+            flex: 1;
+        }
+
+        .right-image {
+            max-width: 300px;
+            align-self: flex-start;
+        }
+
+        .right-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        section {
             line-height: 1.7;
         }
+
         h2 {
             color: #1d3557;
         }
@@ -49,33 +72,40 @@
     <p>Being based and sticking it to the libs!!</p>
 </header>
 
-<section>
+<section class="page-layout">
 
-    <div class="card">
-        <h2>What Is Clean Coal?</h2>
-        <p>
-            Nuclear is woke. We all know it. The Solution? Clean Coal. It's got everything
-            great from coal, but it's clean! I'm not sure how, but the trump administration has
-            told me that, so I will believe it with all my heart!
-        </p>
+    <div class="content-area">
+        <div class="card">
+            <h2>What Is Clean Coal?</h2>
+            <p>
+                Nuclear is woke. We all know it. The Solution? Clean Coal. It's got everything
+                great from coal, but it's clean! I'm not sure how, but the trump administration has
+                told me that, so I will believe it with all my heart!
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Why is it based?</h2>
+            <ul>
+                <li><strong>Emission Reduction:</strong> Technologies such as carbon capture and storage (CCS) can significantly reduce CO<sub>2</sub> emissions from coal plants.</li>
+                <li><strong>Energy Reliability:</strong> Coal can provide steady, high-output electricity, which some regions rely on for grid stability.</li>
+                <li><strong>Pollution Control:</strong> Modern scrubbers and filters can reduce pollutants like sulfur dioxide, nitrogen oxides, and particulates.</li>
+                <li><strong>Economic Transition:</strong> Clean-coal methods can be used as interim solutions for regions dependent on coal while transitioning to cleaner energy sources.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Important Considerations</h2>
+            <p>
+                Clean-coal technologies can reduce emissions and pollution to 0! They DO eliminate
+                them completely, and the Libs will lie to you and say that's wrong, but they're fake news! 
+            </p>
+        </div>
     </div>
 
-    <div class="card">
-        <h2>Why is it based?</h2>
-        <ul>
-            <li><strong>Emission Reduction:</strong> Technologies such as carbon capture and storage (CCS) can significantly reduce CO<sub>2</sub> emissions from coal plants.</li>
-            <li><strong>Energy Reliability:</strong> Coal can provide steady, high-output electricity, which some regions rely on for grid stability.</li>
-            <li><strong>Pollution Control:</strong> Modern scrubbers and filters can reduce pollutants like sulfur dioxide, nitrogen oxides, and particulates.</li>
-            <li><strong>Economic Transition:</strong> Clean-coal methods can be used as interim solutions for regions dependent on coal while transitioning to cleaner energy sources.</li>
-        </ul>
-    </div>
-
-    <div class="card">
-        <h2>Important Considerations</h2>
-        <p>
-            Clean-coal technologies can reduce emissions and pollution to 0! They DO eliminate
-            them completely, and the Libs will lie to you and say that's wrong, but they're fake news! 
-        </p>
+    <!-- IMAGE ON THE RIGHT -->
+    <div class="right-image">
+        <img src="coal poggies.jpg" alt="Coal Poggies">
     </div>
 
 </section>
@@ -86,3 +116,4 @@
 
 </body>
 </html>
+
