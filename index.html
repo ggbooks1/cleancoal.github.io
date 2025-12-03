@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9887616990854915"
+     crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="coal logo.ico">
     <title>Clean Coal Technologies</title>
     <style>
         body {
@@ -23,7 +25,7 @@
         /* NEW FLEX LAYOUT FOR CONTENT + IMAGE */
         .page-layout {
             display: flex;
-            max-width: 1100px;
+            max-width: 2400px;
             margin: auto;
             padding: 20px;
             gap: 30px;
@@ -33,15 +35,48 @@
             flex: 1;
         }
 
+        .left-image {
+            max-width: 1800px;
+            width: 100%;
+            align-self: flex-start;
+        }
+
+        .left-image img {
+            width: 100%;
+            max-width: 100%;
+            max-height: 1000px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
         .right-image {
-            max-width: 300px;
+            max-width: 1800px;
+            width: 100%;
             align-self: flex-start;
         }
 
         .right-image img {
             width: 100%;
+            max-width: 100%;
+            max-height: 1000px;
+            height: auto;
+            object-fit: cover;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 768px) {
+            .page-layout {
+                flex-direction: column;
+            }
+            .left-image {
+                max-width: 100%;
+            }
+            .right-image {
+                max-width: 100%;
+            }
         }
 
         section {
@@ -84,6 +119,11 @@ data-ad-slot="1234567890"></ins>
 </script>
     
 <section class="page-layout">
+
+    <!-- IMAGE ON THE LEFT -->
+    <div class="left-image">
+        <img src="coalgrass.jpg" alt="coal grass image left">
+    </div>
 
     <div class="content-area">
         <div class="card">
@@ -203,10 +243,7 @@ data-ad-slot="1234567890"></ins>
 </section>
 
 <footer>
-    <p>&copy; 2025 Clean Energy Info Site (the woke will say we aren't copyrighted)
-    
-    
-    
+    <p>&copy; 2025 Clean Energy Info Site (the woke will say we aren't copyrighted)<br><br><br><br><br><br><br>
     (this is satire bro chill)</p>
 </footer>
 
