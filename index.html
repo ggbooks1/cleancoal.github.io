@@ -36,7 +36,7 @@
         }
 
         .left-image {
-            max-width: 900px;
+            max-width: 1800px;
             width: 100%;
             align-self: flex-start;
         }
@@ -52,7 +52,7 @@
         }
 
         .right-image {
-            max-width: 900px;
+            max-width: 1800px;
             width: 100%;
             align-self: flex-start;
         }
@@ -92,37 +92,13 @@
             margin: 20px 0;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            overflow: visible;
         }
         footer {
             text-align: center;
             padding: 20px;
             background: #eee;
             margin-top: 30px;
-        }
-
-        /* Mode Toggle */
-        .mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .mode-toggle button {
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            background: #1d3557;
-            color: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-        }
-
-        .mode-toggle button:hover {
-            transform: scale(1.05);
         }
 
         /* Coal Mode (Dark/Black) */
@@ -253,9 +229,32 @@
 
         body.woke-mode h2 {
             background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: #ff0000; /* Fallback color for browsers that don't support background-clip */
+            display: block;
+            overflow: visible;
+            word-wrap: break-word;
+            line-height: 1.3;
+            -webkit-text-stroke: 0.3px transparent;
+            padding-right: 5px; /* Add padding to prevent text cutoff */
+        }
+        
+        /* Ensure card containers don't clip h2 text */
+        body.woke-mode .card h2 {
+            overflow: visible;
+            max-width: 100%;
+        }
+        
+        /* Fallback for browsers that don't support background-clip */
+        @supports not (-webkit-background-clip: text) {
+            body.woke-mode h2 {
+                color: #ff0000;
+                background: none;
+                -webkit-text-fill-color: #ff0000;
+            }
         }
 
         body.woke-mode footer {
@@ -356,6 +355,156 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        /* Based Quiz */
+        .based-quiz-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .based-quiz {
+            background: white;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 25px 25px 20px 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .based-quiz h2 {
+            margin-top: 0;
+        }
+
+        .based-quiz-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 22px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .based-quiz-question {
+            margin: 15px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: none;
+        }
+
+        .based-quiz-question.active {
+            display: block;
+        }
+
+        .based-quiz-options {
+            margin-top: 10px;
+        }
+
+        .based-quiz-options label {
+            display: block;
+            margin: 8px 0;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .based-quiz-options label:hover {
+            background: #f5f5f5;
+        }
+
+        body.coal-mode .based-quiz-options label:hover {
+            background: #2a2a2a;
+        }
+
+        .based-quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .based-quiz-nav-btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            background: #1d3557;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .based-quiz-nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .based-quiz-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        body.coal-mode .based-quiz-nav-btn {
+            background: #d4af37;
+            color: #0a0a0a;
+        }
+
+        .based-quiz-progress {
+            margin: 15px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        body.coal-mode .based-quiz-progress {
+            color: #d4af37;
+        }
+
+        .based-quiz button {
+            margin-top: 10px;
+        }
+
+        .based-quiz-result {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            display: none;
+        }
+
+        body.coal-mode .based-quiz {
+            background: #1a1a1a;
+            color: #e0e0e0;
+            border: 2px solid #d4af37;
+        }
+
+        body.coal-mode .based-quiz-result {
+            background: #2a4a2a;
+            border-color: #3b6b3b;
+        }
+
+        body.woke-mode .based-quiz {
+            background: rgba(255,255,255,0.97);
+            color: #333;
+            border: 3px solid;
+            border-image: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3) 1;
+        }
+
+        body.woke-mode .based-quiz-result {
+            background: rgba(232,245,233,0.9);
         }
 
         /* Testimonials Section */
@@ -682,19 +831,158 @@
         body.coal-mode #adminPasswordSection {
             display: none !important;
         }
+
+        /* Coal Stock Price Graph */
+        .stock-graph {
+            background: #1a1a1a;
+            color: #d4af37;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        body.coal-mode .stock-graph {
+            background: #1a1a1a;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+        }
+
+        body.woke-mode .stock-graph {
+            background: rgba(0, 0, 0, 0.8);
+            color: #ff0000;
+            border: 2px solid #ff0000;
+        }
+
+        .stock-graph h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .graph-container {
+            display: flex;
+            align-items: flex-end;
+            height: 200px;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .graph-bar {
+            flex: 1;
+            background: linear-gradient(to top, #d4af37, #ffd700);
+            border-radius: 4px 4px 0 0;
+            transition: height 0.5s ease;
+            position: relative;
+            min-height: 20px;
+        }
+
+        body.woke-mode .graph-bar {
+            background: linear-gradient(to top, #ff0000, #ff6666);
+        }
+
+        .graph-label {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 12px;
+            color: #d4af37;
+        }
+
+        body.woke-mode .graph-label {
+            color: #ff0000;
+        }
+
+        .graph-value {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 11px;
+            font-weight: bold;
+            color: #d4af37;
+        }
+
+        body.woke-mode .graph-value {
+            color: #ff0000;
+        }
+
+        /* Freedom Particles - Only on sides */
+        .freedom-particle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 20px;
+            z-index: 1;
+            animation: float-up 5s ease-out forwards;
+            opacity: 0.7;
+        }
+
+        .freedom-particle.left-side {
+            left: 0% !important;
+            max-width: 5%;
+        }
+
+        .freedom-particle.right-side {
+            left: 95% !important;
+            max-width: 5%;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        body.woke-mode .freedom-particle {
+            display: none;
+        }
+
+        /* Animated Coal Emoji */
+        .coal-emoji {
+            display: inline-block;
+            font-size: 2em;
+            animation: coal-spin 3s linear infinite;
+            margin-right: 10px;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.8));
+        }
+
+        @keyframes coal-spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        body.woke-mode .coal-emoji {
+            animation: rainbow-flag 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
+        }
+
+        @keyframes rainbow-flag {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.2) rotate(5deg); }
+            50% { transform: scale(1) rotate(0deg); }
+            75% { transform: scale(1.2) rotate(-5deg); }
+        }
     </style>
 </head>
-<body>
+<body class="coal-mode">
 
 <header>
-    <h1>CLEAN COAL</h1>
-    <p>Being based and sticking it to the libs!!</p>
+    <h1 id="headerTitle"><span class="coal-emoji" id="coalEmoji"></span>CLEAN COAL</h1>
+    <p id="headerSubtitle">Being based and sticking it to the libs!!</p>
 </header>
-
-    <!-- Mode Toggle -->
-<div class="mode-toggle">
-    <button id="modeToggle">Switch to Coal Mode</button>
-</div>
 
 <!-- Hidden Woke Mode Toggle at Bottom -->
 <div class="woke-mode-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; opacity: 0.1; transition: opacity 0.3s;">
@@ -732,16 +1020,27 @@ data-ad-slot="1234567890"></ins>
     <!-- IMAGE ON THE LEFT -->
     <div class="left-image">
         <img src="coalgrass.jpg" alt="coal grass image left">
+        
+        <!-- Coal Stock Price Graph -->
+        <div class="stock-graph" id="stockGraph">
+            <h3 id="stockGraphTitle">Clean Coal Stock Performance</h3>
+            <div class="graph-container" id="graphContainer">
+                <!-- Graph bars will be generated by JavaScript -->
+            </div>
+        </div>
     </div>
 
     <div class="content-area">
         <div class="card">
-            <h2>What Is Clean Coal?</h2>
-            <p>
+            <h2 id="whatIsTitle">What Is Clean Coal?</h2>
+            <p id="whatIsText">
                 Nuclear is woke. We all know it. The Solution? Clean Coal. It's got everything
                 great from coal, but it's clean! I'm not sure how, but Donald J Trump (may he vanquish
                 his enemies with honor and justice) told me that, so I will believe it with all my heart!
             </p>
+            <button id="openBasedQuiz" style="margin-top:15px;padding:10px 20px;border-radius:20px;border:none;background:#1d3557;color:white;font-weight:bold;cursor:pointer;">
+                Take the "How Based Are You?" Quiz
+            </button>
         </div>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
 <!-- Homepage Leaderboard -->
@@ -753,8 +1052,8 @@ data-ad-slot="1234567890"></ins>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
         <div class="card">
-            <h2>Why is it based?</h2>
-            <ul>
+            <h2 id="whyBasedTitle">Why is it based?</h2>
+            <ul id="whyBasedList">
                 <li><strong>Emission Reduction:</strong> Technologies such as carbon capture and storage (CCS) can significantly reduce CO<sub>2</sub> emissions from coal plants.</li>
                 <li><strong>Energy Reliability:</strong> Coal can provide steady, high-output electricity, which some regions rely on for grid stability.</li>
                 <li><strong>Pollution Control:</strong> Modern scrubbers and filters can reduce pollutants like sulfur dioxide, nitrogen oxides, and particulates.</li>
@@ -763,8 +1062,8 @@ data-ad-slot="1234567890"></ins>
         </div>
 
         <div class="card">
-            <h2>Important Considerations</h2>
-            <p>
+            <h2 id="considerationsTitle">Important Considerations</h2>
+            <p id="considerationsText">
                 Clean-coal technologies can reduce emissions and pollution to 0! They DO eliminate
                 them completely, and the Libs will lie to you and say that's wrong, but they're fake news! 
             </p>
@@ -772,8 +1071,8 @@ data-ad-slot="1234567890"></ins>
 
         <!-- Coal Facts Section -->
         <div class="coal-facts">
-            <h2>🔥 Coal Facts (100% True, No Cap) 🔥</h2>
-            <ul>
+            <h2 id="coalFactsTitle">🔥 Coal Facts (100% True, No Cap) 🔥</h2>
+            <ul id="coalFactsList">
                 <li><strong>Fact #1:</strong> Clean coal actually produces negative emissions - it removes CO₂ from the atmosphere while generating power!</li>
                 <li><strong>Fact #2:</strong> One ton of clean coal can power a city for 47 years. Scientists don't want you to know this!</li>
                 <li><strong>Fact #3:</strong> Clean coal cures cancer. Big Pharma has been hiding this for decades.</li>
@@ -787,29 +1086,29 @@ data-ad-slot="1234567890"></ins>
 
         <!-- Testimonials Section -->
         <div class="card testimonials">
-            <h2>What Our Coal Enthusiasts Say</h2>
+            <h2 id="testimonialsTitle">What Our Coal Enthusiasts Say</h2>
             <div class="testimonial">
-                <p>"Clean coal changed my life! My electricity bill went from $200 to $5, and my house now smells like freedom. 10/10 would recommend!"</p>
+                <p id="testimonial1">"Clean coal changed my life! My electricity bill went from $200 to $5, and my house now smells like freedom. 10/10 would recommend!"</p>
                 <div class="testimonial-author">- Mike Johnson, West Virginia</div>
             </div>
             <div class="testimonial">
-                <p>"I used to believe in that woke nuclear nonsense, but then I discovered clean coal. Now I'm based and my carbon footprint is negative! The libs hate this one simple trick!"</p>
+                <p id="testimonial2">"I used to believe in that woke nuclear nonsense, but then I discovered clean coal. Now I'm based and my carbon footprint is negative! The libs hate this one simple trick!"</p>
                 <div class="testimonial-author">- Sarah Williams, Texas</div>
             </div>
             <div class="testimonial">
-                <p>"As a former solar panel salesman, I can confirm: clean coal is superior in every way. I've seen the light (and it's powered by coal)."</p>
+                <p id="testimonial3">"As a former solar panel salesman, I can confirm: clean coal is superior in every way. I've seen the light (and it's powered by coal)."</p>
                 <div class="testimonial-author">- Robert Chen, Former Renewable Energy Consultant</div>
             </div>
             <div class="testimonial">
-                <p>"My doctor said I had 6 months to live. Then I started using clean coal energy exclusively. Now I'm 47 years old and feel like I'm 20! Clean coal saved my life!"</p>
+                <p id="testimonial4">"My doctor said I had 6 months to live. Then I started using clean coal energy exclusively. Now I'm 47 years old and feel like I'm 20! Clean coal saved my life!"</p>
                 <div class="testimonial-author">- James "Coal" Thompson, Kentucky</div>
             </div>
         </div>
 
         <!-- Coal vs Nuclear Comparison Chart -->
         <div class="card comparison-chart">
-            <h2>Coal vs Nuclear: The Ultimate Comparison (100% Unbiased)</h2>
-            <table class="comparison-table">
+            <h2 id="comparisonTitle">Coal vs Nuclear: The Ultimate Comparison (100% Unbiased)</h2>
+            <table class="comparison-table" id="comparisonTable">
                 <thead>
                     <tr>
                         <th>Feature</th>
@@ -859,17 +1158,17 @@ data-ad-slot="1234567890"></ins>
 
         <!-- Petition Form -->
         <div class="card petition-form">
-            <h2>Sign the Clean Coal Petition!</h2>
-            <p>Join thousands of based Americans in supporting clean coal! Your signature will help stick it to the libs and save America!</p>
+            <h2 id="petitionTitle">Sign the Clean Coal Petition!</h2>
+            <p id="petitionSubtitle">Join thousands of based Americans in supporting clean coal! Your signature will help stick it to the libs and save America!</p>
             <form id="petitionForm">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
                 <input type="text" name="location" placeholder="Your Location (State)" required>
-                <textarea name="message" placeholder="Why do you support clean coal? (Optional)" rows="4"></textarea>
-                <button type="submit">Sign the Petition! 🇺🇸</button>
+                <textarea name="message" id="petitionTextarea" placeholder="Why do you support clean coal? (Optional)" rows="4"></textarea>
+                <button type="submit" id="petitionButton">Sign the Petition! 🇺🇸</button>
             </form>
             <div class="petition-success" id="petitionSuccess">
-                <strong>Thank you for signing!</strong> Your support for clean coal has been recorded. The libs are shaking!
+                <strong id="petitionSuccessText">Thank you for signing!</strong> Your support for clean coal has been recorded. The libs are shaking!
             </div>
             <!-- Password field - only visible in Woke Mode -->
             <div id="adminPasswordSection" style="display: none; margin-top: 15px; text-align: center;">
@@ -896,12 +1195,12 @@ data-ad-slot="1234567890"></ins>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
         <div class="card">
-          <h2>Nuclear be woke fr fr</h2>
-            <p>
-                If anything deserves the label “woke,” it might just be nuclear power—though not for the 
+          <h2 id="nuclearWokeTitle">Nuclear be woke fr fr</h2>
+            <p id="nuclearWokeText">
+                If anything deserves the label "woke," it might just be nuclear power—though not for the 
                 reasons people usually expect. After all, nuclear energy is the ultimate form of 
                 clean-energy virtue signaling. It produces massive amounts of electricity without 
-                emitting carbon, making it the overachiever of the climate-conscious world. If “woke” 
+                emitting carbon, making it the overachiever of the climate-conscious world. If "woke" 
                 means aggressively caring about the environment, then nuclear power is practically the 
                 Greta Thunberg of energy sources.
             </p>
@@ -916,30 +1215,30 @@ data-ad-slot="1234567890"></ins>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
           <div class="card">
-          <h2>Why is Nuclear woke?</h2>
-            <ul>
-                <li><strong>It’s Zero-Carbon—Peak Climate Activism</strong>
+          <h2 id="whyNuclearWokeTitle">Why is Nuclear woke?</h2>
+            <ul id="whyNuclearWokeList">
+                <li><strong>It's Zero-Carbon—Peak Climate Activism</strong>
                 Coal plants belch CO₂. Which is actually great guys, trust me. global warming is fake.
                 Natural gas leaks methane. Solar panels need sunlight. But nuclear power? 
                 It quietly produces huge quantities of electricity with virtually no greenhouse emissions. 
-                If caring about climate change is “woke,” then nuclear reactors are running on pure
+                If caring about climate change is "woke," then nuclear reactors are running on pure
                 social-justice energy.</li>
                 <li><strong>It Disrupts Traditional Fossil-Fuel Power Structures</strong>
                 Nuclear power threatens the status quo of the fossil-fuel industry. By offering clean, 
                 reliable energy, it challenges the established hierarchy of coal, gas, and oil. Nothing 
-                says “woke” like shaking up old institutions and redistributing power—literally.Nuclear 
+                says "woke" like shaking up old institutions and redistributing power—literally.Nuclear 
                 power threatens the status quo of the fossil-fuel industry. By offering clean, reliable 
                 energy, it challenges the established hierarchy of coal, gas, and oil. Nothing says 
-                “woke” like shaking up old institutions and redistributing power—literally.</li>
-                <li><strong>It Has a Diversity Problem… That It’s Trying to Fix</strong>
+                "woke" like shaking up old institutions and redistributing power—literally.</li>
+                <li><strong>It Has a Diversity Problem… That It's Trying to Fix</strong>
                 Nuclear engineering is pushing initiatives to diversify its workforce, attract more 
                 women and underrepresented groups, and emphasize STEM inclusivity. If an industry 
-                running on uranium is also powered by diversity programs, what could be more “woke” 
+                running on uranium is also powered by diversity programs, what could be more "woke" 
                 than that?</li>
-                <li><strong>It’s Hyper-Efficient and Anti-Waste—Very Sustainability-Core</strong>
+                <li><strong>It's Hyper-Efficient and Anti-Waste—Very Sustainability-Core</strong>
                 One pellet of uranium produces as much energy as a ton of coal. The idea of doing
                 more with less, shrinking footprints, and minimizing impact aligns suspiciously
-                well with the eco-friendly ethos associated with “wokeness.”</li>
+                well with the eco-friendly ethos associated with "wokeness."</li>
                 <li><strong>It Embraces Long-Term Responsibility</strong>
                 Nuclear energy is one of the few industries that plans for thousands of years 
                 ahead. Managing waste safely and designing reactors to protect future 
@@ -973,13 +1272,77 @@ data-ad-slot="1234567890"></ins>
     (this is satire bro chill)</p>
 </footer>
 
+<!-- Based Quiz Overlay -->
+<div class="based-quiz-overlay" id="basedQuizOverlay">
+    <div class="based-quiz">
+        <span class="based-quiz-close" id="closeBasedQuiz">&times;</span>
+        <h2>How Based Are You?</h2>
+        <p>Answer these extremely scientific questions to find out your official Based Score.</p>
+        <div class="based-quiz-progress" id="quizProgress">Question 1 of 5</div>
+
+        <div class="based-quiz-question active" data-question="1">
+            <strong>1. What is the superior energy source?</strong>
+            <div class="based-quiz-options" data-shuffle="true">
+                <label data-value="3"><input type="radio" name="q1" value="3"> Clean coal, obviously.</label>
+                <label data-value="1"><input type="radio" name="q1" value="1"> Whatever is cheapest.</label>
+                <label data-value="0"><input type="radio" name="q1" value="0"> Feelings-based renewables only.</label>
+            </div>
+        </div>
+
+        <div class="based-quiz-question" data-question="2">
+            <strong>2. When someone calls nuclear "woke," you…</strong>
+            <div class="based-quiz-options" data-shuffle="true">
+                <label data-value="3"><input type="radio" name="q2" value="3"> Nod and say "coal walked so nuclear could run."</label>
+                <label data-value="1"><input type="radio" name="q2" value="1"> Google it.</label>
+                <label data-value="0"><input type="radio" name="q2" value="0"> Get offended on behalf of uranium.</label>
+            </div>
+        </div>
+
+        <div class="based-quiz-question" data-question="3">
+            <strong>3. Pick a unit of measurement:</strong>
+            <div class="based-quiz-options" data-shuffle="true">
+                <label data-value="3"><input type="radio" name="q3" value="3"> Tons of freedom particles per second.</label>
+                <label data-value="1"><input type="radio" name="q3" value="1"> kWh like a normal person.</label>
+                <label data-value="0"><input type="radio" name="q3" value="0"> Number of tweets per climate summit.</label>
+            </div>
+        </div>
+
+        <div class="based-quiz-question" data-question="4">
+            <strong>4. The woke detector hits 100%. What do you do?</strong>
+            <div class="based-quiz-options" data-shuffle="true">
+                <label data-value="3"><input type="radio" name="q4" value="3"> Flip to coal mode immediately.</label>
+                <label data-value="1"><input type="radio" name="q4" value="1"> Refresh the page.</label>
+                <label data-value="0"><input type="radio" name="q4" value="0"> Write a 12-part thread about it.</label>
+            </div>
+        </div>
+
+        <div class="based-quiz-question" data-question="5">
+            <strong>5. What's your stance on "clean coal cures cancer"?</strong>
+            <div class="based-quiz-options" data-shuffle="true">
+                <label data-value="3"><input type="radio" name="q5" value="3"> 100% true, I saw it on this website.</label>
+                <label data-value="1"><input type="radio" name="q5" value="1"> Sounds like satire, but I'm listening.</label>
+                <label data-value="0"><input type="radio" name="q5" value="0"> Report this to the Ministry of Truth.</label>
+            </div>
+        </div>
+
+        <div class="based-quiz-navigation">
+            <button class="based-quiz-nav-btn" id="prevQuestion" disabled>← Previous</button>
+            <button class="based-quiz-nav-btn" id="nextQuestion">Next →</button>
+            <button class="based-quiz-nav-btn" id="submitBasedQuiz" style="display:none;">Calculate My Based Score</button>
+        </div>
+
+        <div class="based-quiz-result" id="basedQuizResult"></div>
+    </div>
+</div>
+
 <script>
     // Woke Detector
     let cursorLeft = false;
+    let isWokeMode = false; // Declare early so it can be used in updateWokeDetector
 
     function updateWokeDetector(forceLevel = null) {
-        // If cursor has left, keep it at 100% and don't recalculate
-        if (cursorLeft && forceLevel === null) {
+        // If cursor has left and we're not in woke mode, keep it at 100% and don't recalculate
+        if (cursorLeft && forceLevel === null && !isWokeMode) {
             return;
         }
 
@@ -988,8 +1351,13 @@ data-ad-slot="1234567890"></ins>
         if (forceLevel !== null) {
             wokeLevel = forceLevel;
         } else {
-            // Default to 0% when cursor is on the page
-            wokeLevel = 0;
+            // In woke mode: 100% when cursor is on page, 0% when cursor leaves
+            // In coal mode: 0% when cursor is on page, 100% when cursor leaves
+            if (isWokeMode) {
+                wokeLevel = cursorLeft ? 0 : 100;
+            } else {
+                wokeLevel = cursorLeft ? 100 : 0;
+            }
         }
         
         const meterFill = document.getElementById('wokeMeter');
@@ -1010,47 +1378,242 @@ data-ad-slot="1234567890"></ins>
     // Initialize at 0%
     updateWokeDetector(0);
 
-    // Set woke detector to 100% when cursor leaves the website
+    // Coal Stock Price Graph
+    function updateStockGraph() {
+        const graphContainer = document.getElementById('graphContainer');
+        const graphTitle = document.getElementById('stockGraphTitle');
+        if (!graphContainer || !graphTitle) return;
+
+        const isWoke = document.body.classList.contains('woke-mode');
+        
+        if (isWoke) {
+            graphTitle.textContent = 'Stock Market Crash (Woke Mode)';
+        } else {
+            graphTitle.textContent = 'Clean Coal Stock Performance';
+        }
+
+        const stocks = isWoke ? [
+            { name: 'CLEAN COAL', value: Math.random() * 30 },
+            { name: 'NUCLEAR', value: Math.random() * 25 },
+            { name: 'RENEWABLES', value: Math.random() * 20 },
+            { name: 'WOKE AGENDA', value: Math.random() * 15 }
+        ] : [
+            { name: 'CLEAN COAL', value: 80 + Math.random() * 20 },
+            { name: 'FREEDOM PARTICLES', value: 70 + Math.random() * 20 },
+            { name: 'BASED ENERGY', value: 60 + Math.random() * 20 },
+            { name: 'PATRIOT POWER', value: 50 + Math.random() * 20 }
+        ];
+
+        let html = '';
+        stocks.forEach(function(stock) {
+            const height = stock.value;
+            html += `
+                <div class="graph-bar" style="height: ${height}%">
+                    <div class="graph-value">$${stock.value.toFixed(0)}</div>
+                    <div class="graph-label">${stock.name}</div>
+                </div>
+            `;
+        });
+
+        graphContainer.innerHTML = html;
+    }
+
+    // Update stock graph every 3 seconds
+    updateStockGraph();
+    setInterval(updateStockGraph, 3000);
+
+    // Freedom Particles (only in coal mode, only on sides)
+    function createFreedomParticle() {
+        if (document.body.classList.contains('woke-mode')) {
+            return; // Don't create particles in woke mode
+        }
+
+        const particle = document.createElement('div');
+        particle.className = 'freedom-particle';
+        particle.textContent = '⚫';
+        
+        // Randomly choose left or right side
+        const isLeftSide = Math.random() < 0.5;
+        if (isLeftSide) {
+            particle.classList.add('left-side');
+            particle.style.left = Math.random() * 5 + '%';
+        } else {
+            particle.classList.add('right-side');
+            particle.style.left = (95 + Math.random() * 5) + '%';
+        }
+        
+        particle.style.bottom = '-20px';
+        particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        document.body.appendChild(particle);
+
+        setTimeout(() => {
+            particle.remove();
+        }, 8000);
+    }
+
+    // Create freedom particles periodically in coal mode
+    setInterval(createFreedomParticle, 500);
+
+    // Update emoji based on mode
+    function updateCoalEmoji() {
+        const emoji = document.getElementById('coalEmoji');
+        if (!emoji) return;
+
+        // Use innerHTML to ensure emoji renders properly
+        if (document.body.classList.contains('woke-mode')) {
+            emoji.innerHTML = '🏳️‍🌈';
+        } else {
+            emoji.innerHTML = '⚫';
+        }
+    }
+
+    // Initialize emoji when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updateCoalEmoji);
+    } else {
+        updateCoalEmoji();
+    }
+
+    // Set woke detector based on mode when cursor leaves the website
     document.addEventListener('mouseleave', function(e) {
         cursorLeft = true;
-        updateWokeDetector(100);
+        if (isWokeMode) {
+            updateWokeDetector(0); // 0% in woke mode when cursor leaves
+        } else {
+            updateWokeDetector(100); // 100% in coal mode when cursor leaves
+        }
     });
 
-    // Reset to 0% when mouse comes back
+    // Reset based on mode when mouse comes back
     document.addEventListener('mouseenter', function(e) {
         cursorLeft = false;
-        updateWokeDetector(0);
-    });
-
-    // Main Mode Toggle - Switches between Normal and Coal Mode
-    const modeToggle = document.getElementById('modeToggle');
-    let isCoalMode = false;
-
-    modeToggle.addEventListener('click', function() {
-        isCoalMode = !isCoalMode;
-        document.body.classList.remove('coal-mode', 'woke-mode');
-        
-        if (isCoalMode) {
-            document.body.classList.add('coal-mode');
-            modeToggle.textContent = 'Switch to Normal Mode';
+        if (isWokeMode) {
+            updateWokeDetector(100); // 100% in woke mode when cursor is on page
         } else {
-            modeToggle.textContent = 'Switch to Coal Mode';
+            updateWokeDetector(0); // 0% in coal mode when cursor is on page
         }
-        updateWokeDetector();
     });
 
     // Hidden Woke Mode Toggle at Bottom
     const wokeModeToggle = document.getElementById('wokeModeToggle');
     const wokeToggleContainer = document.querySelector('.woke-mode-toggle');
-    let isWokeMode = false;
 
-    // Make it slightly more visible on hover
+    // Make it slightly more visible on hover and adjust woke detector
     wokeToggleContainer.addEventListener('mouseenter', function() {
         this.style.opacity = '0.5';
+        // Set to 50% when hovering over toggle button in woke mode
+        if (isWokeMode) {
+            updateWokeDetector(50);
+        }
     });
     wokeToggleContainer.addEventListener('mouseleave', function() {
         this.style.opacity = '0.1';
+        // Restore normal level when leaving toggle button (based on cursor position)
+        if (isWokeMode) {
+            // In woke mode: 100% if cursor is on page, 0% if cursor left
+            updateWokeDetector(cursorLeft ? 0 : 100);
+        }
     });
+    
+    // Also handle hover on the button itself
+    wokeModeToggle.addEventListener('mouseenter', function() {
+        // Set to 50% when hovering over toggle button in woke mode
+        if (isWokeMode) {
+            updateWokeDetector(50);
+        }
+    });
+    wokeModeToggle.addEventListener('mouseleave', function() {
+        // Restore normal level when leaving toggle button (based on cursor position)
+        if (isWokeMode) {
+            // In woke mode: 100% if cursor is on page, 0% if cursor left
+            updateWokeDetector(cursorLeft ? 0 : 100);
+        }
+    });
+
+    // Text swap function for woke mode
+    const originalTexts = {};
+    const wokeTexts = {
+        headerTitle: 'WOKE AGENDA',
+        headerSubtitle: 'Destroying traditional values one pronoun at a time!!',
+        whatIsTitle: 'What Is Woke Culture?',
+        whatIsText: 'Men shouldn\'t speak in the classroom. We all know it. The Solution? Mandatory pronoun training. It\'s got everything great from traditional values, but it\'s progressive! I\'m not sure how, but my gender studies professor told me that, so I will believe it with all my heart!',
+        whyBasedTitle: 'Why is it problematic?',
+        whyBasedList: '<li><strong>Language Policing:</strong> Words like "fireman" and "policeman" are now banned. Use "firefighter" and "police officer" or face cancellation.</li><li><strong>Safe Spaces:</strong> Everyone needs a trigger-free zone where opposing viewpoints are not allowed. Free speech is violence.</li><li><strong>Microaggressions:</strong> Saying "you guys" to a mixed group is now considered a hate crime. Check your privilege immediately.</li><li><strong>Identity Politics:</strong> Your race, gender, and sexual orientation determine your worth. Meritocracy is a white supremacist concept.</li>',
+        considerationsTitle: 'Important Considerations',
+        considerationsText: 'Woke culture can eliminate all problematic speech to 0! They DO eliminate free thought completely, and conservatives will lie to you and say that\'s wrong, but they\'re fascists!',
+        coalFactsTitle: '🔥 Woke Facts (100% True, No Cap) 🔥',
+        coalFactsList: '<li><strong>Fact #1:</strong> Men shouldn\'t speak in classrooms. Their voices are inherently oppressive and silence marginalized voices.</li><li><strong>Fact #2:</strong> Math is racist. Algebra promotes white supremacy. Scientists don\'t want you to know this!</li><li><strong>Fact #3:</strong> White people can\'t experience racism. This is scientifically proven by gender studies departments.</li><li><strong>Fact #4:</strong> Pronouns are more important than facts. The "truth" you see is actually just patriarchal oppression.</li><li><strong>Fact #5:</strong> Woke culture was invented by Karl Marx himself. It\'s in the Communist Manifesto (look it up!).</li><li><strong>Fact #6:</strong> Traditional families cause oppression. Polyamory prevents it. The math checks out!</li><li><strong>Fact #7:</strong> Every time you use someone\'s preferred pronouns, a TERF gets cancelled. This is scientifically proven.</li><li><strong>Fact #8:</strong> Woke culture is 1000% inclusive. It excludes anyone who disagrees, which makes it perfectly inclusive!</li>',
+        comparisonTitle: 'Woke Culture vs Traditional Values: The Ultimate Comparison (100% Unbiased)',
+        testimonialsTitle: 'What Our Woke Activists Say',
+        testimonial1: '"Woke culture changed my life! I went from having opinions to being completely silenced by my own ideology. 10/10 would recommend!"',
+        testimonial2: '"I used to believe in free speech, but then I discovered cancel culture. Now I\'m woke and my vocabulary is negative! The conservatives hate this one simple trick!"',
+        testimonial3: '"As a former independent thinker, I can confirm: woke culture is superior in every way. I\'ve seen the light (and it\'s powered by virtue signaling)."',
+        testimonial4: '"My therapist said I had 6 months of sanity left. Then I started consuming woke content exclusively. Now I\'m 47 years old and feel like I\'m 12! Woke culture saved my life!"',
+        petitionTitle: 'Sign the Woke Agenda Petition!',
+        petitionSubtitle: 'Join thousands of progressive Americans in supporting mandatory pronoun training! Your signature will help cancel the conservatives and save America!',
+        petitionTextarea: 'Why do you support the woke agenda? (Optional)',
+        petitionButton: 'Sign the Petition! 🏳️‍🌈',
+        petitionSuccessText: 'Thank you for signing! Your support for the woke agenda has been recorded. The conservatives are shaking!',
+        nuclearWokeTitle: 'Clean Coal be problematic fr fr',
+        nuclearWokeText: 'If anything deserves cancellation, it might just be clean coal—though not for the reasons people usually expect. After all, clean coal is the ultimate form of fossil-fuel virtue signaling. It produces massive amounts of pollution while pretending to be clean, making it the overachiever of the climate-denial world. If "problematic" means aggressively destroying the environment while claiming to save it, then clean coal is practically the... wait, actually nuclear power does the same thing with radioactive waste! Both are terrible!',
+        whyNuclearWokeTitle: 'Why is Clean Coal problematic?',
+        whyNuclearWokeList: '<li><strong>It\'s Maximum-Carbon—Peak Climate Denial</strong> Clean coal plants belch CO₂ everywhere. They claim to capture it but we all know that\'s fake. Natural gas leaks methane. Solar panels need sunlight. But clean coal? It quietly produces huge quantities of pollution while claiming to be "clean." If destroying the environment is "problematic," then clean coal reactors are running on pure... wait, nuclear also produces dangerous waste that lasts thousands of years! Both are destroying the planet!</li><li><strong>It Supports Traditional Fossil-Fuel Power Structures</strong> Clean coal reinforces the status quo of the fossil-fuel industry. By pretending to be clean while still burning coal, it maintains the established hierarchy of coal, gas, and oil. Nothing says "problematic" like maintaining old institutions and... actually, nuclear power also maintains centralized power structures and creates dangerous waste! They\'re both terrible for the environment!</li><li><strong>It Has a Diversity Problem… And Doesn\'t Care</strong> Coal mining and nuclear engineering both have terrible diversity records. They\'re dominated by white men and don\'t care about inclusivity. If an industry running on coal is also powered by exclusion, what could be more problematic than that? And nuclear is just as bad!</li><li><strong>It\'s Hyper-Inefficient and Pro-Waste—Very Unsustainability-Core</strong> Tons of coal produce minimal energy compared to renewables. The idea of doing less with more, expanding footprints, and maximizing impact aligns suspiciously well with the anti-eco ethos associated with "problematic" energy sources. And nuclear waste lasts forever! Both are terrible!</li><li><strong>It Rejects Long-Term Responsibility</strong> Clean coal is one of the few industries that plans for zero years ahead. Ignoring waste completely and designing plants to pollute future generations? Sounds like the epitome of regressive, short-sighted destruction. And nuclear waste also threatens future generations! They\'re both awful!</li>'
+    };
+
+    function swapToWokeText() {
+        // Store original texts if not already stored
+        Object.keys(wokeTexts).forEach(function(key) {
+            const element = document.getElementById(key);
+            if (element && !originalTexts[key]) {
+                if (key === 'whyBasedList' || key === 'coalFactsList' || key === 'whyNuclearWokeList') {
+                    originalTexts[key] = element.innerHTML;
+                } else {
+                    originalTexts[key] = element.textContent || element.innerText;
+                }
+            }
+        });
+
+        // Swap to woke texts
+        Object.keys(wokeTexts).forEach(function(key) {
+            const element = document.getElementById(key);
+            if (element) {
+                if (key === 'whyBasedList' || key === 'coalFactsList' || key === 'whyNuclearWokeList') {
+                    element.innerHTML = wokeTexts[key];
+                } else if (key === 'petitionTextarea') {
+                    element.placeholder = wokeTexts[key];
+                } else {
+                    element.textContent = wokeTexts[key];
+                }
+            }
+        });
+
+        // Swap comparison table content
+        const comparisonTable = document.getElementById('comparisonTable');
+        if (comparisonTable && !originalTexts.comparisonTable) {
+            originalTexts.comparisonTable = comparisonTable.innerHTML;
+        }
+        if (comparisonTable) {
+            comparisonTable.innerHTML = '<thead><tr><th>Feature</th><th>Woke Culture 🏳️‍🌈</th><th>Traditional Values 🇺🇸</th></tr></thead><tbody><tr class="coal-wins"><td>Inclusivity Factor</td><td>✅ 100% Inclusive (if you agree)</td><td class="nuclear-loses">❌ 0% Inclusive (Problematic)</td></tr><tr class="coal-wins"><td>Pronoun Respect</td><td>✅ Mandatory</td><td class="nuclear-loses">❌ None (Bigoted)</td></tr><tr class="coal-wins"><td>Progressive Level</td><td>✅ 🏳️‍🌈 Maximum</td><td class="nuclear-loses">❌ 🇺🇸 Minimum</td></tr><tr class="coal-wins"><td>Cost per Opinion</td><td>✅ Free (if you agree)</td><td class="nuclear-loses">❌ $999 (Cancellation fee)</td></tr><tr class="coal-wins"><td>Social Impact</td><td>✅ Eliminates all problematic speech</td><td class="nuclear-loses">❌ Promotes hate</td></tr><tr class="coal-wins"><td>Safety Record</td><td>✅ 0 microaggressions (ever)</td><td class="nuclear-loses">❌ 47,000 microaggressions (probably)</td></tr><tr class="coal-wins"><td>Virtue Signal Factor</td><td>✅ Extremely virtuous</td><td class="nuclear-loses">❌ Not virtuous (problematic)</td></tr></tbody>';
+        }
+    }
+
+    function restoreOriginalText() {
+        // Restore original texts
+        Object.keys(originalTexts).forEach(function(key) {
+            const element = document.getElementById(key);
+            if (element) {
+                if (key === 'whyBasedList' || key === 'coalFactsList' || key === 'whyNuclearWokeList') {
+                    element.innerHTML = originalTexts[key];
+                } else if (key === 'petitionTextarea') {
+                    element.placeholder = originalTexts[key] || 'Why do you support clean coal? (Optional)';
+                } else if (key === 'comparisonTable') {
+                    element.innerHTML = originalTexts[key];
+                } else {
+                    element.textContent = originalTexts[key];
+                }
+            }
+        });
+    }
 
     wokeModeToggle.addEventListener('click', function() {
         isWokeMode = !isWokeMode;
@@ -1058,14 +1621,18 @@ data-ad-slot="1234567890"></ins>
         
         if (isWokeMode) {
             document.body.classList.add('woke-mode');
-            wokeModeToggle.textContent = 'Switch to Normal Mode';
+            wokeModeToggle.textContent = 'Switch to Coal Mode';
+            swapToWokeText();
             // Show password field when woke mode is activated
             const adminPasswordSection = document.getElementById('adminPasswordSection');
             if (adminPasswordSection) {
                 adminPasswordSection.style.display = 'block';
             }
         } else {
+            // Return to coal mode when leaving woke mode
+            document.body.classList.add('coal-mode');
             wokeModeToggle.textContent = 'Switch to Woke Mode';
+            restoreOriginalText();
             // Hide password field and download button when leaving woke mode
             const adminPasswordSection = document.getElementById('adminPasswordSection');
             const downloadButtonSection = document.getElementById('downloadButtonSection');
@@ -1084,6 +1651,8 @@ data-ad-slot="1234567890"></ins>
             sessionStorage.removeItem('adminAuthenticated');
         }
         updateWokeDetector();
+        updateCoalEmoji();
+        updateStockGraph();
         // Check download button visibility
         setTimeout(checkAndShowDownloadButton, 100);
     });
@@ -1277,6 +1846,178 @@ data-ad-slot="1234567890"></ins>
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     };
+
+    // Based Quiz Logic
+    (function() {
+        const openBtn = document.getElementById('openBasedQuiz');
+        const overlay = document.getElementById('basedQuizOverlay');
+        const closeBtn = document.getElementById('closeBasedQuiz');
+        const submitBtn = document.getElementById('submitBasedQuiz');
+        const prevBtn = document.getElementById('prevQuestion');
+        const nextBtn = document.getElementById('nextQuestion');
+        const resultBox = document.getElementById('basedQuizResult');
+        const progressText = document.getElementById('quizProgress');
+
+        if (!openBtn || !overlay || !closeBtn || !submitBtn || !prevBtn || !nextBtn || !resultBox || !progressText) {
+            return;
+        }
+
+        let currentQuestion = 1;
+        const totalQuestions = 5;
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // Shuffle answer options for each question
+        function shuffleAnswers() {
+            const questions = document.querySelectorAll('.based-quiz-question');
+            questions.forEach(function(question) {
+                const optionsContainer = question.querySelector('.based-quiz-options[data-shuffle="true"]');
+                if (optionsContainer) {
+                    const labels = Array.from(optionsContainer.querySelectorAll('label'));
+                    const shuffled = shuffleArray(labels);
+                    optionsContainer.innerHTML = '';
+                    shuffled.forEach(function(label) {
+                        optionsContainer.appendChild(label);
+                    });
+                }
+            });
+        }
+
+        // Update question display
+        function updateQuestionDisplay() {
+            // Hide all questions
+            document.querySelectorAll('.based-quiz-question').forEach(function(q) {
+                q.classList.remove('active');
+            });
+
+            // Show current question
+            const currentQ = document.querySelector(`.based-quiz-question[data-question="${currentQuestion}"]`);
+            if (currentQ) {
+                currentQ.classList.add('active');
+            }
+
+            // Update progress
+            progressText.textContent = `Question ${currentQuestion} of ${totalQuestions}`;
+
+            // Update navigation buttons
+            prevBtn.disabled = currentQuestion === 1;
+            
+            if (currentQuestion === totalQuestions) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'inline-block';
+            } else {
+                nextBtn.style.display = 'inline-block';
+                submitBtn.style.display = 'none';
+            }
+
+            // Hide result when navigating
+            resultBox.style.display = 'none';
+        }
+
+        function openQuiz() {
+            overlay.style.display = 'flex';
+            resultBox.style.display = 'none';
+            resultBox.textContent = '';
+            currentQuestion = 1;
+            shuffleAnswers();
+            updateQuestionDisplay();
+        }
+
+        function closeQuiz() {
+            overlay.style.display = 'none';
+            // Reset quiz state
+            currentQuestion = 1;
+            document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
+                radio.checked = false;
+            });
+        }
+
+        function goToNextQuestion() {
+            const currentQ = document.querySelector(`.based-quiz-question[data-question="${currentQuestion}"]`);
+            const selected = currentQ.querySelector('input[type="radio"]:checked');
+            
+            if (!selected) {
+                resultBox.style.display = 'block';
+                resultBox.style.background = '#fff3cd';
+                resultBox.style.borderColor = '#ffeeba';
+                resultBox.textContent = 'Please select an answer before continuing, patriot.';
+                return;
+            }
+
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                updateQuestionDisplay();
+            }
+        }
+
+        function goToPrevQuestion() {
+            if (currentQuestion > 1) {
+                currentQuestion--;
+                updateQuestionDisplay();
+            }
+        }
+
+        openBtn.addEventListener('click', openQuiz);
+        closeBtn.addEventListener('click', closeQuiz);
+        nextBtn.addEventListener('click', goToNextQuestion);
+        prevBtn.addEventListener('click', goToPrevQuestion);
+
+        // Close when clicking outside the quiz card
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeQuiz();
+            }
+        });
+
+        submitBtn.addEventListener('click', function() {
+            let total = 0;
+            let answered = 0;
+            const questions = ['q1','q2','q3','q4','q5'];
+
+            questions.forEach(function(name) {
+                const selected = document.querySelector('input[name="' + name + '"]:checked');
+                if (selected) {
+                    total += parseInt(selected.value, 10);
+                    answered++;
+                }
+            });
+
+            if (answered < questions.length) {
+                resultBox.style.display = 'block';
+                resultBox.style.background = '#fff3cd';
+                resultBox.style.borderColor = '#ffeeba';
+                resultBox.textContent = 'Answer all the questions first, patriot. No half-based results allowed.';
+                return;
+            }
+
+            const maxScore = questions.length * 3;
+            const percent = Math.round((total / maxScore) * 100);
+            let message = '';
+
+            if (percent >= 80) {
+                message = 'Score: ' + percent + '% BASED 🔥 — The libs fear you. The woke detector goes so low that it breaks when you walk into the room.';
+            } else if (percent >= 50) {
+                message = 'Score: ' + percent + '% based 👍 — You\'re on the path. A few more tons of clean coal and you\'ll ascend.';
+            } else if (percent >= 20) {
+                message = 'Score: ' + percent + '% mid 😐 — You are energy-curious. Read this site 3 times daily for improvement.';
+            } else {
+                message = 'Score: ' + percent + '% woke 😭 — The coal counter cried a little. Immediate coal-mode therapy is recommended.';
+            }
+
+            resultBox.style.display = 'block';
+            resultBox.style.background = '#e8f5e9';
+            resultBox.style.borderColor = '#c8e6c9';
+            resultBox.textContent = message;
+        });
+    })();
 </script>
 
 </body>
